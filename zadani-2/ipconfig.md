@@ -21,10 +21,10 @@
 
    - v souboru `/etc/network/interfaces` přidat řádky
 
-   ```bash
-   auto enp0s8
-   iface enp0s8 inet dhcp
-   ```
+     ```bash
+     auto enp0s8
+     iface enp0s8 inet dhcp
+     ```
 
    - `auto <iface>`: Tento řádek informuje systém, že rozhraní enp0s8 má být automaticky aktivováno při spuštění systému.
    - `iface <iface> inet dhcp`:
@@ -35,14 +35,16 @@
 
 1. Nastavení statické IP adresy pro **Host-only network**
 
-   ```bash
-   auto eth0
-   iface eth0 inet static
+   - v souboru `/etc/network/interfaces` přidat řádky
 
-    address 192.168.1.100 # Nahraďte zadanou IP adresou
-    netmask 255.255.255.0
-    gateway 192.168.1.1 # Nahraďte zadanou bránou
-   ```
+     ```bash
+     auto eth0
+     iface eth0 inet static
+
+     address 192.168.1.100 # Nahraďte zadanou IP adresou
+     netmask 255.255.255.0
+     gateway 192.168.1.1 # Nahraďte zadanou bránou
+     ```
 
 1. restart
 
