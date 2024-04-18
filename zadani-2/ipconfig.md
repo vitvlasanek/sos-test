@@ -21,15 +21,15 @@
 
 1. Nastavení automatického DHCP pro **NAT**
 
-   - v souboru `/etc/network/interfaces` přidat řádky
+   - v souboru `/etc/network/interfaces` přidat řádky ({iface} nahradit)
 
      ```bash
-     auto enp0s8
-     iface enp0s8 inet dhcp
+     auto {iface}
+     iface {iface} inet dhcp
      ```
 
-   - `auto <iface>`: Tento řádek informuje systém, že rozhraní enp0s8 má být automaticky aktivováno při spuštění systému.
-   - `iface <iface> inet dhcp`:
+   - `auto {iface}`: Tento řádek informuje systém, že rozhraní enp0s8 má být automaticky aktivováno při spuštění systému.
+   - `iface {iface} inet dhcp`:
 
      - `iface`: Toto klíčové slovo označuje začátek bloku konfigurace pro dané síťové rozhraní..
      - `inet`: Určuje, že se jedná o rozhraní IPv4.
@@ -40,8 +40,8 @@
    - v souboru `/etc/network/interfaces` přidat řádky
 
      ```bash
-     auto eth0
-     iface eth0 inet static
+     auto {iface}
+     iface {iface} inet static
 
      address 192.168.1.100 # Nahraďte zadanou IP adresou
      netmask 255.255.255.0
@@ -50,13 +50,17 @@
 
 1. restart
 
-   ```bash
-   ifdown enp0s8
-   ifup enp0s8
-   ```
+   - interface
+
+     ```bash
+     ifdown {iface}
+     ifup {iface}
+     ```
 
    nebo:
 
-   ```bash
-   sudo systemctl restart
-   ```
+   - služby
+
+     ```bash
+     sudo systemctl restart
+     ```
