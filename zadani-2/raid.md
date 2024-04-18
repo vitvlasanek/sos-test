@@ -33,7 +33,7 @@ Do virtualizovaného PC přidejte další čtyři pevné disky o kapacitě alesp
     - help
 
       ```sh
-      man mdadm --create -h
+      mdadm --create -h
       ```
 
     - Command pro vytvoření RAIDU
@@ -50,7 +50,7 @@ Do virtualizovaného PC přidejte další čtyři pevné disky o kapacitě alesp
 
     - check
       ```sh
-      mdadm --status /dev/md0
+      mdadm --detail /dev/md0
       ```
 
 1.  format RAIDu
@@ -69,8 +69,27 @@ Do virtualizovaného PC přidejte další čtyři pevné disky o kapacitě alesp
 
 1.  přidat ve `/etc/fstab`
 
+    - uuid získat z
+      ```sh
+      blkid
+      ```
     - pomocí editoru nano nebo jiný (vi, mcedit ...)
 
       ```sh
       nano /etc/fstab
       ```
+
+    - přidat line
+      ```
+      UUID=f9905ccb-24b5-4da4-9eb0-53d5b9f49d42 /home ext4    defaults        0       0
+      ```
+
+# Zobrazení
+
+- ve `/proc/mdstat`
+
+# rozbití disku
+
+```sh
+   mdadm --manage /dev/md0 --set-faulty /dev/sdd
+```
