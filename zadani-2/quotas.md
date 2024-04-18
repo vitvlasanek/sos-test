@@ -45,4 +45,8 @@ edquota franta
 edquota -p uživatel-prototyp jiny-uživatel
 ```
 
+```sh
+setquota $user 100 200 10 10 -a
+```
+
 # Zobrazení
