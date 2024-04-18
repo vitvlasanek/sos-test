@@ -48,7 +48,7 @@
      gateway 192.168.1.1 # Nahraďte zadanou bránou
      ```
 
-1. restart
+1. Restart
 
    - interface
 
@@ -64,3 +64,8 @@
      ```bash
      sudo systemctl restart
      ```
+
+1. Ověření
+   ```bash
+   ip a
+   ```
