@@ -1,8 +1,10 @@
 # Konfigurace sítě
 
-## vzorové zadání
+## Vzorové zadání
 
 - Nakonfigurujte systém tak, aby síťová karta na rozhraní NAT dostávala IP adresu prostřednictvím protokolu DHCP (z Virtualboxu) a druhá karta bude mít IP adresu nastavenou staticky. Pro konfiguraci obou rozhraní využijte standardní metody používané v distribuci Debian.
+
+## Postup
 
 1. Přidat síťovou kartu ve virtualboxu
 
