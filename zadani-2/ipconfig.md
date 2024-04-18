@@ -35,13 +35,13 @@
 
 1. restart
 
-```bash
-ifdown enp0s8
-ifup enp0s8
-```
+   ```bash
+   ifdown enp0s8
+   ifup enp0s8
+   ```
 
-nebo:
+   nebo:
 
-```bash
-sudo systemctl restart
-```
+   ```bash
+   sudo systemctl restart
+   ```
