@@ -1,4 +1,8 @@
-## dhcp
+# Konfigurace sítě
+
+## vzorové zadání
+
+- Nakonfigurujte systém tak, aby síťová karta na rozhraní NAT dostávala IP adresu prostřednictvím protokolu DHCP (z Virtualboxu) a druhá karta bude mít IP adresu nastavenou staticky. Pro konfiguraci obou rozhraní využijte standardní metody používané v distribuci Debian.
 
 1. Přidat síťovou kartu ve virtualboxu
 
@@ -10,29 +14,34 @@
 1. výpis interfaců
 
    ```bash
-   auto enp0s8
-   iface enp0s8 inet dhcp
+   ip a
    ```
 
 1. nastavení automatického DHCP
 
-- v souboru `/etc/network/interfaces` přidat řádky
-  ```bash
-  auto enp0s8
-  iface enp0s8 inet dhcp
-  ```
+   - v souboru `/etc/network/interfaces` přidat řádky
 
-potom
+   ```bash
+   auto enp0s8
+   iface enp0s8 inet dhcp
+   ```
+
+   - `auto <iface>`: Tento řádek informuje systém, že rozhraní enp0s8 má být automaticky aktivováno při spuštění systému.
+   - `iface <iface> inet dhcp`:
+
+     - `iface`: Toto klíčové slovo označuje začátek bloku konfigurace pro dané síťové rozhraní..
+     - `inet`: Určuje, že se jedná o rozhraní IPv4.
+     - `dhcp`: Tento řádek informuje systém, aby pro konfiguraci IP adresy a dalších síťových nastavení použil protokol DHCP. DHCP server automaticky přidělí IP adresu, masku podsíťě, výchozí bránu a další informace o síti.
+
+1. restart
 
 ```bash
 ifdown enp0s8
 ifup enp0s8
 ```
 
-# nebo
+nebo:
 
 ```bash
 sudo systemctl restart
 ```
-
-networking
