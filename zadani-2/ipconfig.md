@@ -49,7 +49,7 @@
 
      address 192.168.1.100 # Nahraďte zadanou IP adresou
      netmask 255.255.255.0
-     gateway 192.168.1.1 # Nahraďte zadanou bránou
+     # gateway 192.168.1.1 # Nahraďte zadanou bránou ... pravděpodobně nebude
      ```
 
 1. Restart
