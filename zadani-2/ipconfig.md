@@ -21,7 +21,9 @@
 
 1. Nastavení automatického DHCP pro **NAT**
 
-   - v souboru `/etc/network/interfaces` přidat řádky ({iface} nahradit)
+   - v souboru `/etc/network/interfaces` přidat nebo upravit řádky ({iface} nahradit)
+
+     - **pozor, stejný interface se nesmí opakovat**
 
      ```bash
      auto {iface}
@@ -38,6 +40,8 @@
 1. Nastavení statické IP adresy pro **Host-only network**
 
    - v souboru `/etc/network/interfaces` přidat řádky
+
+     - **pozor, stejný interface se nesmí opakovat**
 
      ```bash
      auto {iface}
@@ -62,10 +66,15 @@
    - služby
 
      ```bash
-     sudo systemctl restart
+     sudo systemctl restart networking
      ```
 
 1. Ověření
+
    ```bash
    ip a
+   ```
+
+   ```bash
+   ip -c -br link show
    ```
