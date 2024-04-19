@@ -10,7 +10,6 @@ if [ $# -eq 1 ]; then
   heslo="$1"
 fi
 
-
 for i in $(seq 1 $users_count); do
     if [[ $i -lt 10 ]]
     then
