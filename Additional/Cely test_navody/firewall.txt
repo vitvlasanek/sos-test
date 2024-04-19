@@ -1,0 +1,22 @@
+iptables -L							#seznam pravidel
+iptables -P OUTPUT DROP						#defaultní politika pro output je drop
+
+#povolí ssh z dané ip
+iptables -A INPUT -p tcp --dport 22 -s 192.168.57.1/32	-j ACCEPT
+iptables -A INPUT -p tcp --sport 22 -d 192.168.57.1/32	-j ACCEPT
+
+#povolí http(s)
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 443 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT
+
+
+
+
+-p protokol - TCP/UDP
+
+
+
+[tvojLogin]@ki-vi-ucebna1-gw.vsb.cz heslo jako edison
+pak login na ssh z tamtemrdky
