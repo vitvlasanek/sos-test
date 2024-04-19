@@ -1,0 +1,30 @@
+#! /bin/bash
+# script pro vytvoreni uzivatelu
+
+if [ -z $1 ];
+then
+    HESLO=""
+elif [ ${#1} -lt 5 ];
+then
+    echo "Kratke heslo";
+    exit 1;
+else
+    HESLO=$1;
+fi
+
+for i in $(seq 0 2);
+do
+    number=$i
+
+    if [ $number -lt 10 ];
+    then
+        # vytvor user
+        user=user0$number;
+    else
+        # vytvor usera
+        user=user$number;
+    fi
+
+    useradd -m -s /bin/bash -c "$user" -p `echo $HESLO | openssl passwd -1 -stdin` $user;
+    setquota $user 100 200 10 10 -a /
+done;

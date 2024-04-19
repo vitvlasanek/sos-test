@@ -1,0 +1,94 @@
+TEST
+apt-get install mcedit
+
+1) zapnout cho0177 vse loginy, na sda, dat cestinu, pruzkum ne, grub ano /dev/sda
+
+2)fdisk -l pro disky
+apt update
+apt-get install mdadm
+cfdisk /dev/sd(b,c,d) gpt novy enter ulozit ano enter konec
+fdisk-l pro kontrolu
+se spare diskem mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1 --spare-devices=1 /dev/sdd1 
+mdadm --detail /dev/md0			#Stav raidu
+mkfs.ext4 /dev/md0				#Zavedeni souboroveho systemu
+
+//copy home
+mount /dev/sdxy /mnt
+cp -r /home/* /mnt
+umount /dev/sdxy
+mount /dev/sdxy /home
+
+//bezcopyhome
+mkdir /home/raid
+mount /dev/md0 /home/raid
+
+//checkout mount point
+df -h
+
+//dat permanentne mount
+blkid | grep -i "/dev/md0" >> /etc/fstab
+UUID=45445 /home/raid ext4 defaults 0 0
+
+3)
+cat /etc/passwd pro uzivatele vypis
+apt-get install openssl quota
+ pravy alt+strednik(vlevonahore jebla uvozovka)
+u scriptu passwd je to 1 ne l
+
+userdel -r jmeno;
+
+systemctl start quota
+systemctl enable quota - zapne quoty!!!!!
+
+mcedit /etc/fstab dat grpquota,usrquota na disk kterem
+ chci quoty(tam kde je home?)(tam kde chci quoty takze treba / nebo /dev/md0 127)
+ za remount-ro, nebo za defaults
+
+quotacheck / -fm (klidne /dev/md0nebo127) podle toho kde mas nastavene quoty
+repquota / (nebo md0 nebo /sda)
+
+
+reboot
+
+vytvor script chmod +x na nej
+insert script
+
+4)
+
+//test group ls -la
+
+mkdir /home/vsichni
+groupadd vsichni
+usermod -a -G vsichni user00-10
+chgrp vsichni /home/vsichni
+chmod -R 2770 /home/vsichni
+
+5)
+apt update
+apt install apache2 php libapache2-mod-php mcrypt
+
+//zapnu ssl
+a2enmod ssl
+
+//vytvorim klic
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt		 #Tvorba klice
+
+
+8)
+chmod +x na script*-*-
+date +%F datum vee formatu
+mkdir -p file bez prepisu
+touch -m bez modifikace
+tar -rvf /backup/
+tar -tf /backup/.tar ukaze content
+
+script je v slozcegoogle
+
+/etc/systemd/system vytvor timer a service podle obrazku
+
+systemctl daemon-reload
+systemctl start backups.timer
+systemctl list-timers --all
+
+
+

@@ -1,0 +1,55 @@
+#instalace apache --------------------------------------------------------------------------------------------------
+apt-get install apache2 					#nainstaluje apache
+#už to můžeme najít na ip adrese příadně i v tom lynx
+
+#zprovoznění php -------------------------------------------------------------------------------------------------
+apt-get install libapache2-mod-php 				#nainstaluje php
+service apache2 restart 					#musí restartovat
+mv /var/www/html/index.html /var/www/html/index.php  		#místo toho aby se Seidl jebal s pořadím tak to prostě přejmenoval :D
+#TODO přidáš nějakou PHP funkci abys demonstroval funkčnost
+
+#povolení ssl -------------------------------------------------------------------------------------------------------
+a2enmod ssl							#povolí ssl
+systemctl restart apache2					#restart apache
+a2ensite dafault-ssl						#povolí https stránku
+systemctl reload apache2					#restart apache
+#už pojede stránka i přes https
+a
+a
+a jede
+
+#povolení userdir --------------------------------------------------------------------------------------------------------------
+a2enmod userdir							#povolí userdir
+systemctl restart apache2					#restart apache
+#přepnu na u6ivatele sli0094
+mkdir /home/uziv/public_html						#musí být public_html (souhlasti s tím co je v /etc/apache2/mods-enabled/userdir.conf a musí být v domovském adresáři
+echo AHOJ > public_html/index.php				#napíše ahoj do souboru index.php ve složce index_html
+#když se přepnu na stránku a dám ip/~sli0094 (lynx localhost/~sli0094) měl bych vidět AHOJ
+
+#instalace MySQL ------------------------------------------------------------------------------------------------------------------
+apt-get install default-mysql-server				#nainstaluje mysql (reálně mariadb)
+apt install wget						#stáhne wget aby mohl stahovat soubory
+wget https://releases.wikimedia.org/mediawiki/1.34/mediawiki-1.34.1.tar.gz
+mv mediawiki-1.34.1.tar.gz /var/www/html/			#přesuneme tam kde je index
+tar -xvf mediawiki-1.34.1.tar.gz				#rozbalí do aktuální složky
+ln -s mediawiki-1.34.1 wiki				#vytvoří symlink do složky (abychom nemuseli psát do url verzi)
+
+mysql -u root -p								#připojí do db
+MariaDB [(none)]> use mysql							#použije mysql (může tam být i třeba sqllite tak asi proto)
+MariaDB [mysql]> CREATE USER 'wiki'@'localhost' IDENTIFIED BY 'wiki';		#vytvoří uživatele
+MariaDB [(none)]> CREATE DATABASE wiki;						#vytvoří db
+MariaDB [(none)]> use wiki;							#použije db
+MariaDB [wiki]> GRANT ALL ON wiki.* TO wiki@localhost;				#dá přístup uživateli wiki do db wiki
+MariaDB [wiki]>\q								#opustí db
+
+apt install php-mbstring					#přidá do php extension mbstring
+apt install php-xml						#přidá do php extension xml
+service apache2 restart	
+apt install php-mysql						#přidá do php extension mysql
+
+lynx localhost/MediaWiki(wiki)
+heslo cho0177cho0177 pro usera
+
+#teď by se mělo nainstalovat to media wiki, každopádně nepřišel jsem na to, jak to dělat v tom lynx, respektive mi to hází chybu, takže na to se ho musím doptat
+nastavit dalsi blbosti
+stahnout localsetting.php movnout do slouzky wiki 
